@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 
-import IndexRouter from "./routes/index";
+import IndexRouter from "./routes/index.route";
 
 class App {
   public app!: Application;
