@@ -15,7 +15,7 @@
     "url": "git+https://github.com/techbless/typescript-express-starter.git"
   },
   "author": "techbless <yunbin@hansung.ac.kr>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/techbless/typescript-express-starter/issues"
   },
