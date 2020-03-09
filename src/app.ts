@@ -1,9 +1,12 @@
-import express, { Application } from "express";
+import * as express from "express";
+import * as session from "express-session";
+import * as passport from "passport";
 
 import IndexRouter from "./routes/index.route";
+import UserRouter from "./routes/user.route";
 
 class App {
-  public app!: Application;
+  public app!: express.Application;
 
   constructor() {
     this.app = express();
@@ -15,7 +18,19 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
 
+    this.app.use(
+      session({
+        resave: true,
+        saveUninitialized: true,
+        secret: "Input-your-own-secret-key-here."
+      })
+    );
+
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
+
     this.app.use("/", IndexRouter);
+    this.app.use("/", UserRouter);
   }
 }
 

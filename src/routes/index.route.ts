@@ -1,5 +1,5 @@
 import { Router, Response, Request } from "express";
-
+import * as passportConfig from "../config/passport";
 import IndexController from "../controllers/index.controller";
 
 class IndexRouter {
@@ -9,7 +9,11 @@ class IndexRouter {
     this.router = Router();
 
     this.router.get("/", IndexController.index);
-    this.router.post("/echo", IndexController.echo);
+    this.router.get(
+      "/echo/:message",
+      passportConfig.isAuthenticated,
+      IndexController.echo
+    );
   }
 }
 
