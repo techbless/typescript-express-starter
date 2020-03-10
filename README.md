@@ -19,12 +19,10 @@ For Initial Test
 For Build  
 `yarn build`
 
-For Production  
-(You should `yarn build` before)  
+For Production (You should `yarn build` before)  
 `yarn start`
 
-For Development  
-(nodemon will watch your codes and refresh)  
+For Development (nodemon will watch your codes and refresh)  
 `yarn start:dev`
 
 ## Directory Structure
