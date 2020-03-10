@@ -2,13 +2,16 @@
 
 No more wasting your time writing a ignition code for Express using TypeScript.
 
-# What you should do after cloning
+## This Starter includes
+### TypeScript + Express + TypeORM + Passport
+
+## What you should do after cloning
 
 1. `yarn install`
 2. `yarn test`
 3. Check working fine.
 
-# Npm / Yarn Scripts
+## Npm / Yarn Scripts
 
 For Initial Test  
 `yarn test`
@@ -24,7 +27,7 @@ For Development
 (nodemon will watch your codes and refresh)  
 `yarn start:dev`
 
-# Directory Structure
+## Directory Structure
 
 ```
 typescript-express-starter
@@ -48,6 +51,6 @@ typescript-express-starter
             └─  index.ejs
 ```
 
-# License
+## License
 
 MIT
