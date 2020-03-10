@@ -1,9 +1,9 @@
 # typescript-express-starter
 
-No more wasting your time writing a ignition code for Express using TypeScript.
+### No more wasting your time writing a ignition code for Express using TypeScript.
 
 ## This Starter includes
-### TypeScript + Express + TypeORM + Passport
+#### TypeScript + Express + TypeORM + Passport
 
 ## What you should do after cloning
 
