@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 /**
  * This is a Controller templates, Duplicate this file to use.
