@@ -9,6 +9,7 @@ class UserRouter {
   constructor() {
     this.router = Router();
 
+    this.router.get("/logout", UserController.logout);
     this.router.get("/login", UserController.getLogin);
     this.router.post(
       "/login",
@@ -18,7 +19,6 @@ class UserRouter {
         failureFlash: false
       })
     );
-    this.router.get("/logout", UserController.logout);
   }
 }
 

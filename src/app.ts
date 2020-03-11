@@ -18,6 +18,9 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
 
+    /**
+     * Recommendation: You should session store for saving session.
+     */
     this.app.use(
       session({
         resave: true,
