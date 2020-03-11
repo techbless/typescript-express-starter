@@ -7,7 +7,7 @@
     "build": "tsc",
     "prebuild": "copyfiles -u 1 src/views/**/* src/public/**/* dist/",
     "start": "node dist/server.js",
-    "start:dev": "nodemon --exec ts-node src/server.ts",
+    "start:dev": "nodemon --exec ts-node --files src/server.ts",
     "test": "mocha -r ts-node/register ./src/test/**/*.spec.ts"
   },
   "repository": {
