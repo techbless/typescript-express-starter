@@ -1,3 +1,5 @@
+/// <reference path="./types/passport.ts" />
+
 import * as express from "express";
 import * as session from "express-session";
 import * as passport from "passport";

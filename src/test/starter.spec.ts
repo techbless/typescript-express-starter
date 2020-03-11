@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import { expect } from "chai";
-import request from "supertest";
+import * as request from "supertest";
 import app from "../app";
 
 describe("typescript-express starter", () => {
