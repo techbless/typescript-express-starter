@@ -11,13 +11,12 @@ import app from './app';
 createConnection()
   .then(async () => {
     const PORT: number = +process.env.PORT! || 3000;
+
     app.listen(PORT, (err) => {
       if (err) throw err;
       else console.log('Server Start: Listen on port ', PORT);
     });
   })
-
-
   .catch((err) => {
     console.log('TypeORM connection error: ', err);
   });

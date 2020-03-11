@@ -11,14 +11,12 @@ class UserRouter {
 
     this.router.get('/logout', UserController.logout);
     this.router.get('/login', UserController.getLogin);
-    this.router.post(
-      '/login',
+    this.router.post('/login',
       passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/login',
         failureFlash: false,
-      }),
-    );
+      }));
   }
 }
 
