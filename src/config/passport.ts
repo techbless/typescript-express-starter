@@ -1,8 +1,7 @@
-import * as passport from "passport";
-import * as passportLocal from "passport-local";
-import { User } from "../models/entities/user.entity";
-
-import { Request, Response, NextFunction } from "express";
+import * as passport from 'passport';
+import * as passportLocal from 'passport-local';
+import { Request, Response, NextFunction } from 'express';
+import { User } from '../models/entities/user.entity';
 
 passport.serializeUser(async (user: User, done) => {
   done(null, user.UserId);
@@ -13,6 +12,7 @@ passport.deserializeUser(async (id: number, done) => {
   done(null, user[0]);
 });
 
+
 const LocalStrategy = passportLocal.Strategy;
 
 passport.use(
@@ -20,22 +20,19 @@ passport.use(
     const user = await User.findOne({ UserName: username });
 
     if (!user) {
-      return done(null, false, { message: "Incorrect username" });
+      return done(null, false, { message: 'Incorrect username' });
     }
 
-    if (user.Password != password) {
-      return done(null, false, { message: "Incorrect password" });
+    if (user.Password !== password) {
+      return done(null, false, { message: 'Incorrect password' });
     }
 
     return done(null, user);
-  })
+  }),
 );
 
-export const isAuthenticated = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+
+export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) return next();
-  else res.redirect("/login");
+  res.redirect('/login');
 };

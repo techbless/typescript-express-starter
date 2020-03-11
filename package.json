@@ -8,7 +8,9 @@
     "prebuild": "copyfiles -u 1 src/views/**/* src/public/**/* dist/",
     "start": "node dist/server.js",
     "start:dev": "nodemon --exec ts-node --files src/server.ts",
-    "test": "mocha -r ts-node/register ./src/test/**/*.spec.ts"
+    "test": "mocha -r ts-node/register ./src/test/**/*.spec.ts",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -29,8 +31,13 @@
     "@types/passport": "^1.0.2",
     "@types/passport-local": "^1.0.33",
     "@types/supertest": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
     "chai": "^4.2.0",
     "copyfiles": "^2.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
     "mocha": "^7.1.0",
     "supertest": "^4.0.2",
     "ts-node": "^8.6.2",
