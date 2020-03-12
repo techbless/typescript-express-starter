@@ -1,6 +1,10 @@
-# typescript-express-starter
 
-**No more wasting your time writing an ignition codes for Express using TypeScript.**
+<h1 align="center">typescript-express-starter</h1>
+<h3 align="center">No more wasting your time writing an ignition codes for Express using TypeScript.</h3>
+<p align="center">
+  <img src="https://david-dm.org/techbless/typescript-express-starter.svg" alt="Dependency Status">
+  <img src="https://david-dm.org/techbless/typescript-express-starter/dev-status.svg" alt="devDependency Status">
+</p>
 
 ## This Starter includes
 **TypeScript + Express + TypeORM + Passport**
