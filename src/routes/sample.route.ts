@@ -11,7 +11,7 @@ class SampleRouter {
   constructor() {
     this.router = Router();
 
-    this.router.get('/echo', passportConfig.isAuthenticated, SampleController.echo);
+    this.router.get('/echo', passportConfig.isAuthenticated, SampleController.sample);
   }
 }
 
