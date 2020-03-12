@@ -1,6 +1,6 @@
 # typescript-express-starter
 
-### No more wasting your time writing an ignition codes for Express using TypeScript.
+**No more wasting your time writing an ignition codes for Express using TypeScript.**
 
 ## This Starter includes
 #### TypeScript + Express + TypeORM + Passport
@@ -9,12 +9,6 @@
 | Requirement | Reason |
 |:-----------:|-------------------------------------------------|
 |`mysql`      | Mysql Server is required for TypeORM            |
-
-## What you should do after cloning
-
-1. `yarn install`
-2. `yarn test`
-3. Check working fine.
 
 ## Npm / Yarn Scripts
 | Npm Script | Description |
