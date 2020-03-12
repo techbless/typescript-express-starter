@@ -8,8 +8,8 @@ passport.serializeUser(async (user: User, done) => {
 });
 
 passport.deserializeUser(async (id: number, done) => {
-  const user = await User.findByIds([id]);
-  done(null, user[0]);
+  const user = await User.findOne(id);
+  done(null, user);
 });
 
 
