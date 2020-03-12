@@ -15,6 +15,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'max-len': ['error', {"codes": 140}],
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,
     'import/extensions': 0,
