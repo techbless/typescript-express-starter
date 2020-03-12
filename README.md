@@ -3,7 +3,7 @@
 **No more wasting your time writing an ignition codes for Express using TypeScript.**
 
 ## This Starter includes
-#### TypeScript + Express + TypeORM + Passport
+**TypeScript + Express + TypeORM + Passport**
 
 ## Requirement
 | Requirement | Reason |
