@@ -5,8 +5,12 @@
   <img src="https://david-dm.org/techbless/typescript-express-starter.svg" alt="Dependency Status">
   <img src="https://david-dm.org/techbless/typescript-express-starter/dev-status.svg" alt="devDependency Status">
 </p>
-<h3 align="center">No more wasting your time writing an ignition codes for Express using TypeScript.</h3>
 
+
+<p align="center">
+  <img src="https://github.com/techbless/typescript-express-starter/blob/master/logo.png" alt="logo">
+</p>
+<h3 align="center">No more wasting your time writing an ignition codes for Express using TypeScript.</h3>
 ## This Starter includes
 **TypeScript + Express + TypeORM + Passport**
 
