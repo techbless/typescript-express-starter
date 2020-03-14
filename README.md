@@ -11,7 +11,8 @@
   <img src="https://github.com/techbless/typescript-express-starter/blob/master/logo.png" alt="logo">
 </p>
 <h3 align="center">No more wasting your time writing an ignition codes for Express using TypeScript.</h3>
-## This Starter includes
+
+## Get Ready to Fly on
 **TypeScript + Express + TypeORM + Passport**
 
 ## Requirement
