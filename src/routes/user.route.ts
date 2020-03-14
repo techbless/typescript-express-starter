@@ -9,14 +9,17 @@ class UserRouter {
   constructor() {
     this.router = Router();
 
-    this.router.get('/logout', UserController.logout);
+    this.router.get('/register', UserController.getRegister);
+    this.router.post('/register', UserController.postRegister);
+
     this.router.get('/login', UserController.getLogin);
-    this.router.post('/login',
-      passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/login',
-        failureFlash: false,
-      }));
+    this.router.post('/login', passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/login',
+      failureFlash: false,
+    }));
+
+    this.router.get('/logout', UserController.logout);
   }
 }
 

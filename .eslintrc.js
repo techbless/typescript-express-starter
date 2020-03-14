@@ -15,13 +15,13 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    'max-len': ['error', {"codes": 140}],
     'import/no-unresolved': 0,
     'import/prefer-default-export': 0,
     'import/extensions': 0,
     'no-console': 0,
     'no-unused-vars': 0,
     'consistent-return': 0,
-    'import/first': 0
+    'import/first': 0,
+    'linebreak-style': 0
   },
 };
