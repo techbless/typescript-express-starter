@@ -1,6 +1,9 @@
-import { Request, Response } from 'express';
-import userModel from '../models/user.model';
+import { Request, Response, NextFunction } from 'express';
+import { IVerifyOptions } from 'passport-local';
 import { User } from '../models/entities/user.entity';
+import userModel from '../models/user.model';
+
+import passport = require('passport');
 
 
 class UserController {
@@ -12,6 +15,19 @@ class UserController {
       title: 'Login',
     });
   };
+
+  public postLogin = (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate('local', (err: Error, user: User, info: IVerifyOptions) => {
+      if (err) { return next(err); }
+      if (!user) { return res.redirect('/login'); }
+
+      // eslint-disable-next-line no-shadow
+      req.logIn(user, (err) => {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+    })(req, res, next);
+  }
 
   public getRegister = (req: Request, res: Response) => {
     res.render('account/register', {
