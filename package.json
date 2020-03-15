@@ -44,10 +44,12 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@types/helmet": "0.0.45",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "helmet": "^3.21.3",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
