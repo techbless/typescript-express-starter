@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as session from 'express-session';
 import * as passport from 'passport';
+import * as helmet from 'helmet';
 
 import IndexRouter from './routes/index.route';
 import UserRouter from './routes/user.route';
@@ -10,6 +11,10 @@ class App {
 
   constructor() {
     this.app = express();
+
+    // Prevent Security Issues
+    // this.app.disable('x-powered-by');
+    this.app.use(helmet());
 
     this.app.use(express.static(`${__dirname}/public`));
     this.app.set('view engine', 'ejs');
