@@ -5,6 +5,7 @@ import * as helmet from 'helmet';
 
 import IndexRouter from './routes/index.route';
 import UserRouter from './routes/user.route';
+import EchoRouter from './routes/echo.route';
 
 class App {
   public app!: express.Application;
@@ -39,6 +40,7 @@ class App {
 
     this.app.use('/', IndexRouter);
     this.app.use('/', UserRouter);
+    this.app.use('/', EchoRouter);
   }
 }
 

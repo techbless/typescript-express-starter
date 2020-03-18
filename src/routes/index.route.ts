@@ -9,7 +9,6 @@ class IndexRouter {
     this.router = Router();
 
     this.router.get('/', IndexController.index);
-    this.router.get('/echo/:message', passportConfig.isAuthenticated, IndexController.echo);
   }
 }
 

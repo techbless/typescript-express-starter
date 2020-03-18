@@ -8,10 +8,6 @@ class IndexController {
       userName,
     });
   };
-
-  public echo = (req: Request, res: Response) => {
-    res.send(req.params.message);
-  };
 }
 
 export default new IndexController();
