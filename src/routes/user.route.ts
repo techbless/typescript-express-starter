@@ -1,7 +1,7 @@
 import { Router, Response, Request } from 'express';
-import * as passport from 'passport';
 
 import UserController from '../controllers/user.controller';
+import wrapAsync from './async.wrapper';
 
 class UserRouter {
   public router!: Router;
@@ -10,10 +10,10 @@ class UserRouter {
     this.router = Router();
 
     this.router.get('/register', UserController.getRegister);
-    this.router.post('/register', UserController.postRegister);
+    this.router.post('/register', wrapAsync(UserController.postRegister));
 
     this.router.get('/login', UserController.getLogin);
-    this.router.post('/login', UserController.postLogin);
+    this.router.post('/login', wrapAsync(UserController.postLogin));
 
     this.router.get('/logout', UserController.logout);
   }
