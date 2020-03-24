@@ -1,22 +1,31 @@
-import * as dotenv from 'dotenv';
+/* eslint-disable no-unused-expressions */
+//  eslint-disable-next-line spaced-comment
+/// <reference path="../@types/express.d.ts" />
 
-import { expect } from 'chai';
-import * as request from 'supertest';
-import app from '../app';
+import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+import { expect } from 'chai';
+import * as request from 'supertest';
+import { Http2ServerRequest } from 'http2';
+import createConnection from '../config/ormconfig';
+import app from '../app';
+import { User } from '../models/entities/user.entity';
+
+
 describe('typescript-express starter', () => {
-  const req = request(app);
+  let req: request.SuperTest<request.Test>;
 
-  describe('public/test.txt', () => {
-    it('GET /text.txt status code should be 200', async () => {
-      await req.get('/test.txt').expect(200);
-    });
+  before(async () => {
+    await createConnection();
+    req = request(app);
+  });
 
-    it('GET /text.txt should return "STATIC_FILE_TEST"', async () => {
-      const result = await req.get('/test.txt');
-      expect(result.text).equals('STATIC_FILE_TEST');
+
+  describe('public/css/common.css', () => {
+    it('GET /css/common.css status code should be 200', async () => {
+      await req.get('/css/common.css').expect(200);
     });
   });
 
@@ -25,21 +34,89 @@ describe('typescript-express starter', () => {
       await req.get('/').expect(200);
     });
 
-    it('GET / should return "Index Page"', async () => {
+    it('GET / should return "Hello, Guest"', async () => {
       const result = await req.get('/');
-      expect(result.text).equals('Index Page');
+
+      // const isNormalIndexPage = result.text.search('Hello, Guest') !== -1;
+      // expect(isNormalIndexPage).to.be.true;
+      expect(result.text).includes('Hello, Guest');
     });
   });
 
-  describe('POST /echo', () => {
-    it('POST /echo should return "echo~!"', async () => {
-      const result = await req
-        .post('/echo')
-        .set('Content-Type', 'application/json')
+  describe('register', () => {
+    it('GET /register', async () => {
+      await req.get('/register').expect(200);
+    });
+
+    it('POST /register', async () => {
+      const result = await req.post('/register')
         .send({
-          message: 'echo~!',
-        });
-      expect(result.text).equals('echo~!');
+          username: 'test',
+          password: '1234',
+          email: 'test@email.com',
+          firstname: 'first',
+          lastname: 'last',
+        })
+        .expect(200);
+
+      const { UserId } = result.body;
+      expect(result.body.UserId).to.be.a('number');
+
+      const user = await User.findOne(UserId);
+      expect(user).not.to.be.undefined;
+    });
+
+    after(async () => {
+      const user = await User.findOne({
+        UserName: 'test',
+        Password: '1234',
+      });
+      user?.remove();
+    });
+  });
+
+  describe('login', () => {
+    it('GET /login', async () => {
+      await req.get('/login').expect(200);
+    });
+
+    before(async () => {
+      const user = new User();
+      user.UserName = 'test';
+      user.Password = '1234';
+      user.Email = 'test@email.com';
+
+      await user.save();
+    });
+
+    it('POST /login with invalid username', async () => {
+      const result = await req.post('/login')
+        .send({
+          username: 'wrong',
+          password: '1234',
+        })
+        .expect(302)
+        .expect('Location', '/login');
+    });
+
+    it('POST /login with invalid password', async () => {
+      const result = await req.post('/login')
+        .send({
+          username: 'test',
+          password: 'wrong',
+        })
+        .expect(302)
+        .expect('Location', '/login');
+    });
+
+    it('POST /login with all valid account', async () => {
+      const result = await req.post('/login')
+        .send({
+          username: 'test',
+          password: '1234',
+        })
+        .expect(302)
+        .expect('Location', '/');
     });
   });
 });
