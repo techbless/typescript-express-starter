@@ -8,7 +8,7 @@
 
 
 <p align="center">
-  <img src="https://github.com/techbless/typescript-express-starter/blob/master/logo.png" alt="logo">
+  <img src="https://github.com/techbless/typescript-express-starter/blob/master/logo.png?raw=true" alt="logo">
 </p>
 <h3 align="center">No more wasting your time writing an ignition codes for Express using TypeScript.</h3>
 
