@@ -7,6 +7,7 @@
   <img src="https://david-dm.org/techbless/typescript-express-starter/dev-status.svg" alt="devDependency Status">
 </p>
 <h3 align="center">No more wasting your time writing an ignition codes for Express using TypeScript.</h3>
+
 ## Get Ready to Fly on
 **TypeScript + Express + TypeORM + Passport**
 
