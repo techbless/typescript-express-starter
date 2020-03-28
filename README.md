@@ -1,17 +1,12 @@
-
-<h1 align="center">typescript-express-starter</h1>
+<p align="center">
+  <img src="https://github.com/techbless/typescript-express-starter/blob/master/logo.png?raw=true" alt="logo">
+</p>
 <p align="center">
   <img src="https://travis-ci.org/techbless/typescript-express-starter.svg?branch=master" alt="Build Status">
   <img src="https://david-dm.org/techbless/typescript-express-starter.svg" alt="Dependency Status">
   <img src="https://david-dm.org/techbless/typescript-express-starter/dev-status.svg" alt="devDependency Status">
 </p>
-
-
-<p align="center">
-  <img src="https://github.com/techbless/typescript-express-starter/blob/master/logo.png?raw=true" alt="logo">
-</p>
 <h3 align="center">No more wasting your time writing an ignition codes for Express using TypeScript.</h3>
-
 ## Get Ready to Fly on
 **TypeScript + Express + TypeORM + Passport**
 
