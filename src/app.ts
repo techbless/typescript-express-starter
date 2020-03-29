@@ -13,14 +13,13 @@ class App {
   constructor() {
     this.app = express();
 
-    // Prevent Security Issues
-    // this.app.disable('x-powered-by');
-    this.app.use(helmet());
-
-    this.app.use(express.static(`${__dirname}/public`));
     this.app.set('view engine', 'ejs');
     this.app.set('views', `${__dirname}/views`);
 
+    // Prevent Security Issues
+    // this.app.disable('x-powered-by');
+    this.app.use(helmet());
+    this.app.use(express.static(`${__dirname}/public`));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
 
