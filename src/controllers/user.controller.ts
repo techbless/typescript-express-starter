@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { IVerifyOptions } from 'passport-local';
-import { User } from '../models/entities/user.entity';
-import userModel from '../models/user.model';
+import User from '../models/user';
 
 import passport = require('passport');
 
@@ -36,12 +35,12 @@ class UserController {
   }
 
   public postRegister = async (req: Request, res: Response) => {
-    const result: User = await userModel.createUser({
-      UserName: req.body.username,
-      Email: req.body.email,
-      Password: req.body.password,
-      FristName: req.body.firstname,
-      LastName: req.body.lastname,
+    const result: User = await User.create({
+      userName: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      firstName: req.body.firstname,
+      lastName: req.body.lastname,
     });
 
     res.json(result);
