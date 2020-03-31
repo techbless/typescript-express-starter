@@ -1,7 +1,7 @@
 import * as passport from 'passport';
 import * as passportLocal from 'passport-local';
 import { Request, Response, NextFunction } from 'express';
-import User from '../models/user';
+import User from '../models/user.model';
 
 passport.serializeUser(async (user: User, done) => {
   done(null, user.userId);
