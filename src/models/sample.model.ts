@@ -1,9 +1,31 @@
-/**
- * This is a Model templates, Duplicate this file to use.
- */
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from './sequelize';
+import { dbType } from './index';
 
-class SampleModel {
-  // Some codes for models should be here.
+class Sample extends Model {
+    public readonly userId!: number;
+
+    public readonly createdAt!: Date;
+
+    public readonly updatedAt!: Date;
 }
 
-export default new SampleModel();
+Sample.init({
+  userId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+}, {
+  sequelize,
+  modelName: 'Sample',
+  tableName: 'samples',
+  charset: 'utf8mb4',
+  collate: 'utf8mb4_unicode_ci',
+});
+
+export const associate = (db: dbType) => {
+
+};
+
+export default User;
