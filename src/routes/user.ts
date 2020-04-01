@@ -1,6 +1,6 @@
 import { Router, Response, Request } from 'express';
 
-import UserController from '../controllers/user.controller';
+import UserController from '../controllers/user';
 import wrapAsync from './async.wrapper';
 
 class UserRouter {

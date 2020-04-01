@@ -10,7 +10,7 @@ import { expect } from 'chai';
 import * as request from 'supertest';
 import { sequelize } from '../models/index';
 import app from '../app';
-import User from '../models/user.model';
+import User from '../models/user';
 
 describe('typescript-express starter', () => {
   let req: request.SuperTest<request.Test>;

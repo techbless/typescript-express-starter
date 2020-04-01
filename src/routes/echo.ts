@@ -1,6 +1,6 @@
 import { Router, Response, Request } from 'express';
 import * as passportConfig from '../config/passport';
-import echoController from '../controllers/echo.controller';
+import echoController from '../controllers/echo';
 
 class EchoRouter {
   public router!: Router;
