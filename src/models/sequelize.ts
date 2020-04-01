@@ -1,5 +1,5 @@
 import { Sequelize, Options } from 'sequelize';
-import config from '../config/config';
+import config from '../config/sequelize';
 
 const env = process.env.NODE_ENV as ('production' | 'test' | 'development') || 'development';
 const { database, username, password } = config[env];
