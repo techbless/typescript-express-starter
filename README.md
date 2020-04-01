@@ -9,12 +9,12 @@
 <h3 align="center">No more wasting your time writing an ignition codes for Express using TypeScript.</h3>
 
 ## Get Ready to Fly on
-**TypeScript + Express + TypeORM + Passport**
+**TypeScript + Express + Sequelize + Passport**
 
 ## Requirement
 | Requirement | Reason |
 |:-----------:|-------------------------------------------------|
-|`mysql`      | Mysql Server is required for TypeORM            |
+|`mysql`      | Mysql Server is required for Sequelize          |
 
 ## Npm / Yarn Scripts
 | Npm Script | Description |
@@ -36,20 +36,38 @@ typescript-express-starter
 ├─ dist
 │   └─ [ build files ]
 └─ src
-      ├─ app.ts
-      ├─ server.ts
+      ├─ app.ts ← instantiate app
+      ├─ server.ts ← entry point which starts server
+      ├─ @types
+      |  └─ express.d.ts ← override req.User types for passport.js
+      ├─ config
+      |  ├─ passport.ts ← config for passport.js
+      |  └─ sequelize.ts ← config for sequelize.js
       ├─ controllers
-      │   └─ index.controller.ts
+      │   ├─ index.ts ← controller for index '/'
+      |   ├─ user.ts ← controller for accounts
+      |   ├─ echo.ts ← controller for echo test, recommend to delete
+      |   └─ sample.ts ← sample template controller
       ├─ models
-      │   └─ example.model.ts  <- Should be removed, a template for models
+      │   ├─ index.ts ← export sequelize instance
+      |   ├─ sequelize.ts ← instantiate sequelize.ts
+      |   ├─ user.ts ← User model
+      |   └─ sample.ts ← sample template model
       ├─ public
-      │   └─ test.txt  <- Should be removed, just for test
+      │   └─ common.css ← static file which can be accessed with '/common.css'
       ├─ routes
-      │   └─ index.route.ts
+      │   ├─ index.ts ← router for index '/'
+      |   ├─ user.ts ← router for accounts
+      |   ├─ echo.ts ← router for echo test
+      |   ├─ sample.ts ← sample template router
+      |   └─ async.wrapper.ts ← wrapper for async controller function.
       ├─ test
-      │   └─ starter.spec.ts
+      │   └─ starter.spec.ts ← initial test cases
       └─ views
-            └─  index.ejs
+            ├─ acount
+            |  ├─ login.ejs ← view for login page
+            |  └─ register.ejs ← view for join page
+            └─  index.ejs ← viwe for index page '/'
 ```
 
 ## License
