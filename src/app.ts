@@ -3,9 +3,9 @@ import * as session from 'express-session';
 import * as passport from 'passport';
 import * as helmet from 'helmet';
 
-import IndexRouter from './routes/index.route';
-import UserRouter from './routes/user.route';
-import EchoRouter from './routes/echo.route';
+import IndexRouter from './routes/index';
+import UserRouter from './routes/user';
+import EchoRouter from './routes/echo';
 
 class App {
   public app!: express.Application;

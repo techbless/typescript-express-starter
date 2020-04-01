@@ -1,6 +1,6 @@
 import { Router, Response, Request } from 'express';
 import * as passportConfig from '../config/passport';
-import IndexController from '../controllers/index.controller';
+import IndexController from '../controllers';
 
 class IndexRouter {
   public router!: Router;

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { IVerifyOptions } from 'passport-local';
-import User from '../models/user.model';
+import User from '../models/user';
 
 import passport = require('passport');
 
