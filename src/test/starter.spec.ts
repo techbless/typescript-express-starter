@@ -8,17 +8,15 @@ dotenv.config();
 
 import { expect } from 'chai';
 import * as request from 'supertest';
-import { Http2ServerRequest } from 'http2';
-import createConnection from '../config/ormconfig';
+import { sequelize } from '../models/index';
 import app from '../app';
-import { User } from '../models/entities/user.entity';
-
+import User from '../models/user.model';
 
 describe('typescript-express starter', () => {
   let req: request.SuperTest<request.Test>;
 
   before(async () => {
-    await createConnection();
+    await sequelize.sync();
     req = request(app);
   });
 
@@ -59,19 +57,24 @@ describe('typescript-express starter', () => {
         })
         .expect(200);
 
-      const { UserId } = result.body;
-      expect(result.body.UserId).to.be.a('number');
+      const UserId: number = result.body;
+      expect(result.body.userId).to.be.a('number');
 
-      const user = await User.findOne(UserId);
+      const user = await User.findOne({
+        where: {
+          userId: UserId,
+        },
+      });
       expect(user).not.to.be.undefined;
     });
 
     after(async () => {
-      const user = await User.findOne({
-        UserName: 'test',
-        Password: '1234',
+      await User.destroy({
+        where: {
+          userName: 'test',
+          password: '1234',
+        },
       });
-      user?.remove();
     });
   });
 
@@ -81,12 +84,11 @@ describe('typescript-express starter', () => {
     });
 
     before(async () => {
-      const user = new User();
-      user.UserName = 'test';
-      user.Password = '1234';
-      user.Email = 'test@email.com';
-
-      await user.save();
+      await User.create({
+        userName: 'test',
+        password: '1234',
+        email: 'test@email.com',
+      });
     });
 
     it('POST /login with invalid username', async () => {
@@ -117,6 +119,15 @@ describe('typescript-express starter', () => {
         })
         .expect(302)
         .expect('Location', '/');
+    });
+
+    after(async () => {
+      await User.destroy({
+        where: {
+          userName: 'test',
+          password: '1234',
+        },
+      });
     });
   });
 });

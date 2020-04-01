@@ -1,14 +1,19 @@
 import * as passport from 'passport';
 import * as passportLocal from 'passport-local';
 import { Request, Response, NextFunction } from 'express';
-import { User } from '../models/entities/user.entity';
+import User from '../models/user.model';
 
 passport.serializeUser(async (user: User, done) => {
-  done(null, user.UserId);
+  done(null, user.userId);
 });
 
 passport.deserializeUser(async (id: number, done) => {
-  const user = await User.findOne(id);
+  const user = await User.findOne({
+    where: {
+      userId: id,
+    },
+  });
+
   done(null, user);
 });
 
@@ -17,13 +22,17 @@ const LocalStrategy = passportLocal.Strategy;
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
-    const user = await User.findOne({ UserName: username });
+    const user = await User.findOne({
+      where: {
+        userName: username,
+      },
+    });
 
     if (!user) {
       return done(null, false, { message: 'Incorrect username' });
     }
 
-    if (user.Password !== password) {
+    if (user.password !== password) {
       return done(null, false, { message: 'Incorrect password' });
     }
 
