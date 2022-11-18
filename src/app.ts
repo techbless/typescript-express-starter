@@ -4,7 +4,6 @@ import * as passport from "passport";
 import * as cors from "cors";
 import helmet from "helmet";
 
-import IndexRouter from "./routes/index";
 import UserRouter from "./routes/user";
 import EchoRouter from "./routes/echo";
 

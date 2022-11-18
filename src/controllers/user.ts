@@ -5,23 +5,14 @@ import CustomError from "../custom_error";
 import * as passport from "passport";
 
 class UserController {
-  public getLogin(req: Request, res: Response) {
-    if (req.user) {
-      return res.redirect("/");
-    }
-    res.render("account/login", {
-      title: "Login",
-    });
-  }
-
   async postLogin(req: Request, res: Response, next: NextFunction) {
     const authenticate = new Promise((resolve, reject) => {
-      passport.authenticate("local", (err, user, _info) => {
+      passport.authenticate("local", (err, user, info) => {
         if (err) {
           reject(err);
         }
         if (!user) {
-          reject(new CustomError(401, "Login Failed", "Check your credential"));
+          reject(new CustomError(401, "Login Failed", info.message));
         }
 
         req.logIn(user, (err) => {

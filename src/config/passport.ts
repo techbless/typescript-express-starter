@@ -29,11 +29,11 @@ passport.use(
     });
 
     if (!user) {
-      return done(null, false, { message: "Incorrect username" });
+      return done(null, false, { message: "Incorrect Username" });
     }
 
     if (user.password !== password) {
-      return done(null, false, { message: "Incorrect password" });
+      return done(null, false, { message: "Incorrect Password" });
     }
 
     return done(null, user);
