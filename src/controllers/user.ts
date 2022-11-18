@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { IVerifyOptions } from "passport-local";
-import User from "../models/user";
+import UserService from "../services/user";
 import CustomError from "../custom_error";
 import * as passport from "passport";
+
+import { UserCreationAttributes } from "../models/user";
 
 class UserController {
   async postLogin(req: Request, res: Response, next: NextFunction) {
@@ -11,6 +13,7 @@ class UserController {
         if (err) {
           reject(err);
         }
+
         if (!user) {
           reject(new CustomError(401, "Login Failed", info.message));
         }
@@ -18,15 +21,16 @@ class UserController {
         req.logIn(user, (err) => {
           if (err) {
             reject(err);
+          } else {
+            resolve(user);
           }
-
-          resolve(user);
         });
       })(req, res, next);
     });
 
     try {
       const result = await authenticate;
+
       const HOUR_IN_SECOND = 3600000;
       req.session.cookie.maxAge = 31 * 24 * HOUR_IN_SECOND; // Remember-Me 31 days
       res.json(result);
@@ -36,15 +40,10 @@ class UserController {
   }
 
   public async postRegister(req: Request, res: Response) {
-    const result: User = await User.create({
-      userName: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      firstName: req.body.firstname,
-      lastName: req.body.lastname,
-    });
+    const userInfo: UserCreationAttributes = req.body;
 
-    res.json(result);
+    const user = await UserService.createUser(userInfo);
+    res.json(user);
   }
 
   public logout(req: Request, res: Response) {

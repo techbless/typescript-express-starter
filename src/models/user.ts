@@ -1,23 +1,34 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 import { sequelize } from "./sequelize";
 import { dbType } from "./index";
 
-class User extends Model {
-  public readonly userNo!: number;
+export type UserAttributes = {
+  userNo: number;
+  username: string;
+  email: string;
+  name: number;
+  password: string;
+};
 
-  public userName!: string;
+export type UserCreationAttributes = Optional<
+  UserAttributes,
+  "userNo" | "name"
+>;
 
-  public email!: string;
+class User extends Model<UserAttributes, UserCreationAttributes> {
+  declare readonly userNo: number;
 
-  public password!: string;
+  declare username: string;
 
-  public firstName!: string;
+  declare email: string;
 
-  public lastName!: string;
+  declare name: number;
 
-  public readonly createdAt!: Date;
+  declare password: string;
 
-  public readonly updatedAt!: Date;
+  declare readonly createdAt: Date;
+
+  declare readonly updatedAt: Date;
 }
 
 User.init(
@@ -27,7 +38,7 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    userName: {
+    username: {
       type: DataTypes.STRING(50),
       allowNull: false,
       unique: true,
@@ -37,15 +48,12 @@ User.init(
       allowNull: false,
       unique: true,
     },
+    name: {
+      type: DataTypes.STRING,
+    },
     password: {
       type: DataTypes.STRING(50),
       allowNull: false,
-    },
-    firstName: {
-      type: DataTypes.STRING(50),
-    },
-    lastName: {
-      type: DataTypes.STRING(50),
     },
   },
   {

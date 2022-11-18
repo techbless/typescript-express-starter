@@ -71,7 +71,7 @@ describe("typescript-express starter", () => {
     after(async () => {
       await User.destroy({
         where: {
-          userName: "test",
+          username: "test",
           password: "1234",
         },
       });
@@ -85,7 +85,7 @@ describe("typescript-express starter", () => {
 
     before(async () => {
       await User.create({
-        userName: "test",
+        username: "test",
         password: "1234",
         email: "test@email.com",
       });
@@ -127,7 +127,7 @@ describe("typescript-express starter", () => {
     after(async () => {
       await User.destroy({
         where: {
-          userName: "test",
+          username: "test",
           password: "1234",
         },
       });
