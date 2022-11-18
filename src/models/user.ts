@@ -3,7 +3,7 @@ import { sequelize } from "./sequelize";
 import { dbType } from "./index";
 
 class User extends Model {
-  public readonly userId!: number;
+  public readonly userNo!: number;
 
   public userName!: string;
 
@@ -22,7 +22,7 @@ class User extends Model {
 
 User.init(
   {
-    userId: {
+    userNo: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,

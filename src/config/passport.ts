@@ -5,13 +5,13 @@ import { Request, Response, NextFunction } from "express";
 import User from "../models/user";
 
 passport.serializeUser(async (user: User, done) => {
-  done(null, user.userId);
+  done(null, user.userNo);
 });
 
-passport.deserializeUser(async (id: number, done) => {
+passport.deserializeUser(async (userNo: number, done) => {
   const user = await User.findOne({
     where: {
-      userId: id,
+      userNo: userNo,
     },
   });
 
