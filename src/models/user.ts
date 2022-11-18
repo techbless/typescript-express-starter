@@ -1,61 +1,62 @@
-import { Model, DataTypes } from 'sequelize';
-import { sequelize } from './sequelize';
-import { dbType } from './index';
+import { Model, DataTypes } from "sequelize";
+import { sequelize } from "./sequelize";
+import { dbType } from "./index";
 
 class User extends Model {
-    public readonly userId!: number;
+  public readonly userId!: number;
 
-    public userName!: string;
+  public userName!: string;
 
-    public email!: string;
+  public email!: string;
 
-    public password!: string;
+  public password!: string;
 
-    public firstName!: string;
+  public firstName!: string;
 
-    public lastName!: string;
+  public lastName!: string;
 
-    public readonly createdAt!: Date;
+  public readonly createdAt!: Date;
 
-    public readonly updatedAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
-User.init({
-  userId: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+User.init(
+  {
+    userId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    userName: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      unique: true,
+    },
+    email: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    firstName: {
+      type: DataTypes.STRING(50),
+    },
+    lastName: {
+      type: DataTypes.STRING(50),
+    },
   },
-  userName: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    unique: true,
-  },
-  email: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    unique: true,
-  },
-  password: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-  },
-  firstName: {
-    type: DataTypes.STRING(50),
-  },
-  lastName: {
-    type: DataTypes.STRING(50),
-  },
-}, {
-  sequelize,
-  modelName: 'User',
-  tableName: 'users',
-  charset: 'utf8mb4',
-  collate: 'utf8mb4_unicode_ci',
-});
+  {
+    sequelize,
+    modelName: "User",
+    tableName: "users",
+    charset: "utf8mb4",
+    collate: "utf8mb4_unicode_ci",
+  }
+);
 
-export const associate = (db: dbType) => {
-
-};
+export const associate = (db: dbType) => {};
 
 export default User;
