@@ -1,6 +1,12 @@
+import { Request, Response, NextFunction } from "express";
 import CustomError from "../custom_error.js";
 
-function errorHandler(err, _req, res, _next) {
+function errorHandler(
+  err: any,
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+) {
   let customError = err;
 
   if (!(err instanceof CustomError)) {
