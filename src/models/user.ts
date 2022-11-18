@@ -6,7 +6,7 @@ export type UserAttributes = {
   userNo: number;
   username: string;
   email: string;
-  name: number;
+  name: string;
   password: string;
 };
 
@@ -22,7 +22,7 @@ class User extends Model<UserAttributes, UserCreationAttributes> {
 
   declare email: string;
 
-  declare name: number;
+  declare name: string;
 
   declare password: string;
 
