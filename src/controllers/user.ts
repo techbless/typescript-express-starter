@@ -42,6 +42,7 @@ class UserController extends Controller {
 
       const HOUR_IN_SECOND = 3600000;
       req.session.cookie.maxAge = 31 * 24 * HOUR_IN_SECOND; // Remember-Me 31 days
+
       res.json(result);
     } catch (err) {
       next(err);

@@ -9,6 +9,7 @@ class UserRouter {
     this.router = Router();
 
     this.router.post('/v1/register', UserController.postRegister);
+
     this.router.post('/v1/login', UserController.postLogin);
 
     this.router.get('/v1/logout', UserController.logout);
