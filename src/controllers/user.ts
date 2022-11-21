@@ -5,10 +5,18 @@ import UserService from '../services/user';
 import CustomError from '../custom_error';
 
 import { UserCreationAttributes } from '../models/user';
+import Controller from './controller';
 
-class UserController {
+class UserController extends Controller {
   @AsyncHandled
   async postLogin(req: Request, res: Response, next: NextFunction) {
+    const loginInfo: { username: string; password: string } = req.body;
+
+    this.assertType(loginInfo, {
+      username: 'String',
+      password: 'String',
+    });
+
     const authenticate = new Promise((resolve, reject) => {
       passport.authenticate('local', (authError, user, info) => {
         if (authError) {
@@ -43,6 +51,13 @@ class UserController {
   @AsyncHandled
   public async postRegister(req: Request, res: Response) {
     const userInfo: UserCreationAttributes = req.body;
+
+    this.assertType(userInfo, {
+      username: 'String',
+      email: 'String',
+      name: 'String | Undefined',
+      password: 'String',
+    });
 
     const user = await UserService.createUser(userInfo);
     res.json(user);

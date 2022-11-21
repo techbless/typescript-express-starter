@@ -33,11 +33,7 @@ passport.use(
   }),
 );
 
-export const isAuthenticated = (
-  req: Request,
-  _res: Response,
-  next: NextFunction,
-) => {
+export const isAuthenticated = (req: Request, _res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) return next();
   throw new CustomError(401, 'Unauthorized', 'Please login first');
 };
