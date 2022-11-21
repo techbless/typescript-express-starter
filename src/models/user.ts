@@ -1,6 +1,6 @@
-import { Model, DataTypes, Optional } from "sequelize";
-import { sequelize } from "./sequelize";
-import { dbType } from "./index";
+import { Model, DataTypes, Optional } from 'sequelize';
+import { sequelize } from './sequelize';
+import { dbType } from './index';
 
 export type UserAttributes = {
   userNo: number;
@@ -12,7 +12,7 @@ export type UserAttributes = {
 
 export type UserCreationAttributes = Optional<
   UserAttributes,
-  "userNo" | "name"
+  'userNo' | 'name'
 >;
 
 class User extends Model<UserAttributes, UserCreationAttributes> {
@@ -58,11 +58,11 @@ User.init(
   },
   {
     sequelize,
-    modelName: "User",
-    tableName: "users",
-    charset: "utf8mb4",
-    collate: "utf8mb4_unicode_ci",
-  }
+    modelName: 'User',
+    tableName: 'users',
+    charset: 'utf8mb4',
+    collate: 'utf8mb4_unicode_ci',
+  },
 );
 
 export const associate = (db: dbType) => {};

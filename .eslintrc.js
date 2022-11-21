@@ -22,6 +22,7 @@ module.exports = {
     'no-unused-vars': 0,
     'consistent-return': 0,
     'import/first': 0,
-    'linebreak-style': 0
+    'linebreak-style': 0,
+    'class-methods-use-this': 0,
   },
 };

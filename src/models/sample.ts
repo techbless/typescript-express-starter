@@ -1,6 +1,6 @@
-import { Model, DataTypes } from "sequelize";
-import { sequelize } from "./sequelize";
-import { dbType } from "./index";
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from './sequelize';
+import { dbType } from './index';
 
 class Sample extends Model {
   public readonly userNo!: number;
@@ -20,11 +20,11 @@ Sample.init(
   },
   {
     sequelize,
-    modelName: "Sample",
-    tableName: "samples",
-    charset: "utf8mb4",
-    collate: "utf8mb4_unicode_ci",
-  }
+    modelName: 'Sample',
+    tableName: 'samples',
+    charset: 'utf8mb4',
+    collate: 'utf8mb4_unicode_ci',
+  },
 );
 
 export const associate = (db: dbType) => {};
