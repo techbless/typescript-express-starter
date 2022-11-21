@@ -16,13 +16,10 @@ class App {
 
   constructor() {
     this.app = express();
-
     this.app.set('trust proxy', true);
-    this.app.set('view engine', 'ejs');
-    this.app.set('views', `${__dirname}/views`);
 
+    // cors
     const WHITE_LIST = ['http://localhost:3000'];
-
     this.app.use(
       cors({
         origin: WHITE_LIST,
@@ -46,6 +43,7 @@ class App {
       }),
     );
 
+    // Passport.js
     passportConfig.setStrategies();
     this.app.use(passport.initialize());
     this.app.use(passport.session());
@@ -53,6 +51,7 @@ class App {
     this.app.use('/', UserRouter);
     this.app.use('/', EchoRouter);
 
+    // Error Handler
     this.app.use(errorHandler);
   }
 }
