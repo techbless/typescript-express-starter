@@ -4,6 +4,8 @@ import * as passport from 'passport';
 import * as cors from 'cors';
 import helmet from 'helmet';
 
+import * as passportConfig from './config/passport';
+
 import errorHandler from './middlewares/error_handler';
 
 import UserRouter from './routes/user';
@@ -44,6 +46,7 @@ class App {
       }),
     );
 
+    passportConfig.setStrategies();
     this.app.use(passport.initialize());
     this.app.use(passport.session());
 

@@ -6,32 +6,41 @@ import User from '../models/user';
 import UserService from '../services/user';
 import CustomError from '../custom_error';
 
-passport.serializeUser(async (user: User, done) => {
-  done(null, user.userNo);
-});
+function setSerializer() {
+  passport.serializeUser(async (user: User, done) => {
+    done(null, user.userNo);
+  });
 
-passport.deserializeUser(async (userNo: number, done) => {
-  const user = await UserService.getUserByUserNo(userNo);
-  done(null, user);
-});
+  passport.deserializeUser(async (userNo: number, done) => {
+    const user = await UserService.getUserByUserNo(userNo);
+    done(null, user);
+  });
+}
 
-const LocalStrategy = passportLocal.Strategy;
+function setLocalStrategy() {
+  const LocalStrategy = passportLocal.Strategy;
 
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    const user = await UserService.getUserByUsername(username);
+  passport.use(
+    new LocalStrategy(async (username, password, done) => {
+      const user = await UserService.getUserByUsername(username);
 
-    if (!user) {
-      return done(null, false, { message: 'Incorrect Username' });
-    }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect Username' });
+      }
 
-    if (user.password !== password) {
-      return done(null, false, { message: 'Incorrect Password' });
-    }
+      if (user.password !== password) {
+        return done(null, false, { message: 'Incorrect Password' });
+      }
 
-    return done(null, user);
-  }),
-);
+      return done(null, user);
+    }),
+  );
+}
+
+export function setStrategies() {
+  setSerializer();
+  setLocalStrategy();
+}
 
 export const isAuthenticated = (req: Request, _res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) return next();

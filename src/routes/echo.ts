@@ -1,5 +1,4 @@
 import { Router, Response, Request } from 'express';
-import { isAuthenticated } from '../config/passport';
 import echoController from '../controllers/echo';
 
 class EchoRouter {
