@@ -1,5 +1,5 @@
-import { userInfo } from "os";
-import User, { UserCreationAttributes } from "../models/user";
+import { userInfo } from 'os';
+import User, { UserCreationAttributes } from '../models/user';
 
 class UserService {
   async createUser(userInfo: UserCreationAttributes) {
@@ -14,7 +14,7 @@ class UserService {
   async getUserByUsername(username: string) {
     return User.findOne({
       where: {
-        username: username,
+        username,
       },
     });
   }

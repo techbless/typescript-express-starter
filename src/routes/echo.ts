@@ -1,6 +1,5 @@
-import { Router, Response, Request } from "express";
-import { isAuthenticated } from "../config/passport";
-import echoController from "../controllers/echo";
+import { Router, Response, Request } from 'express';
+import echoController from '../controllers/echo';
 
 class EchoRouter {
   public router!: Router;
@@ -8,7 +7,7 @@ class EchoRouter {
   constructor() {
     this.router = Router();
 
-    this.router.get("/v1/echo", isAuthenticated, echoController.echo);
+    this.router.get('/v1/echo', echoController.echo);
   }
 }
 
