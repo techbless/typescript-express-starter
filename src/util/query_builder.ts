@@ -1,71 +1,43 @@
-import { Op } from "sequelize";
+import { Op } from 'sequelize';
 
-const OPERATOR = {
-  lte: Op.lte,
-  gte: Op.gte,
-  lt: Op.lt,
-  gt: Op.gt,
-  in: Op.in,
-  like: Op.like,
-};
+class FilterQueryBuilder {
+  buildFilterQuery(query: any) {
+    const result: any = {};
 
-type OpType = keyof typeof OPERATOR;
+    Object.keys(query).forEach((key) => {
+      if (Object.prototype.hasOwnProperty.call(query, key)) {
+        const value = query[key];
 
-class QueryBuilder {
-  static buildFilterQuery(filterQuery: Object) {
-    let result: any = {};
+        // Build query for the multiple operation for one key
+        if (typeof value === 'object' && !Array.isArray(value)) {
+          result[key] = {};
 
-    for (const key in filterQuery) {
-      // retrieve key-value
-      let value: any | string = filterQuery[key as keyof typeof filterQuery];
-
-      // convert object into given operator such as 'price[gte]', 'price[lte]'
-      if (typeof value === "object" && !Array.isArray(value)) {
-        result[key] = {};
-        for (const op in value) {
-          result[key][OPERATOR[op as OpType]] = value[op];
+          if (value.lte) {
+            result[key][Op.lte] = value.lte;
+          }
+          if (value.gte) {
+            result[key][Op.gte] = value.gte;
+          }
+        } else {
+          result[key] = value;
         }
-        continue;
       }
-
-      // convert array into 'in' operator
-      if (Array.isArray(value)) {
-        result[key] = {};
-        result[key][Op.in] = value;
-        continue;
-      }
-
-      // convert into 'like' operator
-      if (
-        typeof value === "string" &&
-        value.charAt(0) == "%" &&
-        value.charAt(value.length - 1) == "%"
-      ) {
-        value = value.replace(/^%/, ""); // 시작이 %면, 제거
-        value = value.replace(/%$/, ""); // 마지막이 %면, 제거
-        value = decodeURIComponent(value);
-        value = "%" + value + "%";
-        result[key] = { [Op.like]: value };
-        continue;
-      }
-
-      // convert into default equal operator
-      result[key] = value;
-    }
+    });
 
     return result;
   }
 
-  static buildSortQuery(sortQuery: string) {
-    if (!sortQuery) {
+  buildSortQuery(query: string) {
+    if (!query) {
       return null;
     }
 
-    if (sortQuery.charAt(0) == "-") {
-      return [[sortQuery.split("-")[1], "DESC"]];
-    } else {
-      return [[sortQuery, "ASC"]];
+    if (query.charAt(0) == '-') {
+      return [[query.split('-')[1], 'DESC']];
     }
+
+    return [[query, 'ASC']];
   }
 }
-export default QueryBuilder;
+
+export default new FilterQueryBuilder();
