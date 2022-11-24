@@ -1,5 +1,16 @@
 import { Op } from 'sequelize';
 
+const OPERATOR = {
+  lt: Op.lt,
+  gt: Op.gt,
+  lte: Op.lte,
+  gte: Op.gte,
+  in: Op.in,
+  between: Op.between,
+};
+
+type OpType = keyof typeof OPERATOR;
+
 class FilterQueryBuilder {
   buildFilterQuery(query: any) {
     const result: any = {};
@@ -12,15 +23,14 @@ class FilterQueryBuilder {
         if (typeof value === 'object' && !Array.isArray(value)) {
           result[key] = {};
 
-          if (value.lte) {
-            result[key][Op.lte] = value.lte;
-          }
-          if (value.gte) {
-            result[key][Op.gte] = value.gte;
-          }
-        } else {
-          result[key] = value;
+          Object.keys(value).forEach((op) => {
+            result[key][OPERATOR[op as OpType]] = value[op];
+          });
+
+          return;
         }
+
+        result[key] = value;
       }
     });
 
