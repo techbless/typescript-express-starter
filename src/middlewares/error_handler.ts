@@ -5,18 +5,14 @@ function errorHandler(err: any, _req: Request, res: Response, _next: NextFunctio
   let customError = err;
 
   if (!(err instanceof CustomError)) {
-    if (process.env.NODE_ENV == 'development') {
+    if (process.env.NODE_ENV === 'development') {
       customError = new CustomError(
         500,
-        err.name || 'Oh no, this is embarrasing. We are having troubles my friend',
+        err.name || 'Oh no, this is embarrassing. We are having troubles.',
         err.message || 'No additional information',
       );
     } else {
-      customError = new CustomError(
-        500,
-        'Oh no, this is embarrasing. We are having troubles my friend',
-        'No Additional Information, Please contact to the manager.',
-      );
+      customError = new CustomError(500, 'Server Error', 'No Additional Information');
     }
   }
 

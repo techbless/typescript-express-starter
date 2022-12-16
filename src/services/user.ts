@@ -1,4 +1,3 @@
-import { userInfo } from 'os';
 import User, { UserCreationAttributes } from '../models/user';
 
 class UserService {
