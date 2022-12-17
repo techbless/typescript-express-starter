@@ -7,7 +7,7 @@ class EchoRouter {
   constructor() {
     this.router = Router();
 
-    this.router.get('/v1/echo', echoController.echo);
+    this.router.get('/v1/echo', echoController.getEcho);
   }
 }
 
