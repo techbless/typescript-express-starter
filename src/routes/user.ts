@@ -13,6 +13,8 @@ class UserRouter {
     this.router.post('/v1/login', UserController.postLogin);
 
     this.router.get('/v1/logout', UserController.logout);
+
+    this.router.get('/v1/user/me', UserController.getLoggedInUser);
   }
 }
 

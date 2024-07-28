@@ -44,7 +44,7 @@ User.init(
       unique: true,
     },
     email: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(100),
       allowNull: false,
       unique: true,
     },
@@ -52,7 +52,7 @@ User.init(
       type: DataTypes.STRING,
     },
     password: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(500),
       allowNull: false,
     },
   },

@@ -1,10 +1,13 @@
 import * as passport from 'passport';
 import * as passportLocal from 'passport-local';
 import { Request, Response, NextFunction } from 'express';
+import * as bcrypt from 'bcrypt';
 
 import User from '../models/user';
 import UserService from '../services/user';
 import CustomError from '../custom_error';
+import UnauthorizedExceptioni from "../exceptions/NotAuthenticatedException";
+import NotAuthenticatedException from "../exceptions/NotAuthenticatedException";
 
 function setSerializer() {
   passport.serializeUser(async (user: User, done) => {
@@ -28,7 +31,7 @@ function setLocalStrategy() {
         return done(null, false, { message: 'Incorrect Username' });
       }
 
-      if (user.password !== password) {
+      if (!await bcrypt.compare(password, user.password)) {
         return done(null, false, { message: 'Incorrect Password' });
       }
 
@@ -44,5 +47,5 @@ export function setStrategies() {
 
 export const isAuthenticated = (req: Request, _res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) return next();
-  throw new CustomError(401, 'Unauthorized', 'Please login first');
+  throw new NotAuthenticatedException();
 };

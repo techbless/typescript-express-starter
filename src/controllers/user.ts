@@ -4,8 +4,16 @@ import * as passport from 'passport';
 import UserService from '../services/user';
 import CustomError from '../custom_error';
 
-import { UserCreationAttributes } from '../models/user';
+import User, { UserCreationAttributes } from '../models/user';
 import Controller from './controller';
+import {Builder} from "builder-pattern";
+import DuplicatedException from "../exceptions/DuplicatedUserException";
+import DuplicatedUserException from "../exceptions/DuplicatedUserException";
+import UserResponse from "../dto/userResponse";
+import LoginFailException from "../exceptions/LoginFailException";
+import SessionNotFoundException from "../exceptions/SessionNotFoundException";
+import userResponse from "../dto/userResponse";
+
 
 class UserController extends Controller {
   @AsyncHandled
@@ -17,14 +25,14 @@ class UserController extends Controller {
       password: 'String',
     });
 
-    const authenticate = new Promise((resolve, reject) => {
+    const authenticate = new Promise<User>((resolve, reject) => {
       passport.authenticate('local', (authError, user, info) => {
         if (authError) {
           reject(authError);
         }
 
         if (!user) {
-          reject(new CustomError(401, 'Login Failed', info.message));
+          reject(new LoginFailException(info.message));
         }
 
         req.logIn(user, loginError => {
@@ -38,12 +46,13 @@ class UserController extends Controller {
     });
 
     try {
-      const result = await authenticate;
+      const user: User = await authenticate;
 
       const HOUR_IN_SECOND = 3600000;
       req.session.cookie.maxAge = 31 * 24 * HOUR_IN_SECOND; // Remember-Me 31 days
 
-      res.json(result);
+      const userResponse= this.convertUserToUserRespones(user);
+      res.json(userResponse);
     } catch (err) {
       next(err);
     }
@@ -60,15 +69,57 @@ class UserController extends Controller {
       password: 'String',
     });
 
-    const user = await UserService.createUser(userInfo);
-    res.json(user);
+    try {
+      const user = await UserService.createUser(userInfo);
+      const userResponse= this.convertUserToUserRespones(user);
+
+      res.json(userResponse);
+    } catch (ex) {
+      throw new DuplicatedUserException();
+    }
   }
 
-  public logout(req: Request, res: Response) {
-    req.logout(err => {
-      console.log(err);
+  @AsyncHandled
+  public async logout(req: Request, res: Response) {
+
+    const logoutTask = new Promise<boolean>((resolve, reject) => {
+      req.logout(err => {
+        if(err) {
+          throw err;
+        }
+      });
+
+      resolve(true);
     });
-    res.redirect('/');
+
+    const result = await logoutTask;
+
+    res.json(result);
+  }
+
+  @AsyncHandled
+  public async getLoggedInUser(req: Request, res: Response) {
+    const user = req.user;
+
+    if(!user) {
+      throw new SessionNotFoundException();
+    }
+
+    const userResponse= this.convertUserToUserRespones(user);
+    res.json(userResponse);
+  }
+
+  private convertUserToUserRespones(user: User) : UserResponse {
+    const userResponse= Builder<UserResponse>()
+        .userNo(user.userNo)
+        .username(user.username)
+        .email(user.email)
+        .name(user.name)
+        .updatedAt(user.updatedAt)
+        .createdAt(user.createdAt)
+        .build();
+
+    return userResponse;
   }
 }
 

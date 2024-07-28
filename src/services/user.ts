@@ -1,8 +1,11 @@
 import User, { UserCreationAttributes } from '../models/user';
-
+import * as bcrypt from "bcrypt";
 class UserService {
   async createUser(userInfo: UserCreationAttributes) {
-    console.log(userInfo);
+    const SALT_ROUNDS = 10;
+    const hashedPassword = await bcrypt.hash(userInfo.password, SALT_ROUNDS);
+    userInfo.password = hashedPassword;
+
     return User.create(userInfo);
   }
 
